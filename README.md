@@ -3,6 +3,7 @@
 这是一个基于HTML、CSS和JavaScript的个人博客网站，采用清新的多巴胺风格设计，使用GitHub作为存储方式。
 
 ## 项目结构
+
 vlamenco-blog/                 # 项目根目录
 ├── .github/                   # GitHub配置文件
 ├── archetypes/                # 文章模板
@@ -31,6 +32,7 @@ vlamenco-blog/                 # 项目根目录
 ├── package.json               # 项目依赖
 ├── postcss.config.js          # PostCSS配置
 └── README.md                  # 项目说明
+
 ## 功能特点
 
 - 清新的多巴胺风格设计，色彩明亮活泼
