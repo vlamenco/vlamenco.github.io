@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music | Vlamenco's Blog</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#FF6B8B',
+                        secondary: '#6B9FFF',
+                        accent: '#FFD166',
+                        mint: '#66D2A0',
+                        lavender: '#B794F4',
+                        dark: '#333333',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .hover-lift {
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
+            }
+            .hover-lift:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            }
+            .tag-pill {
+                @apply px-3 py-1 rounded-full text-sm cursor-pointer transition-colors;
+            }
+            .tag-pill-active {
+                @apply bg-accent text-dark;
+            }
+            .tag-pill-inactive {
+                @apply bg-gray-100 text-gray-700 hover:bg-gray-200;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans text-dark">
+    <!-- 移动端菜单按钮 -->
+    <button id="mobile-menu-button" class="fixed top-4 left-4 z-50 md:hidden bg-white rounded-full p-2 shadow-lg">
+        <i class="fa fa-bars text-xl"></i>
+    </button>
+
+    <!-- 侧边导航 -->
+    <aside id="sidebar" class="fixed top-0 left-0 h-full w-64 bg-white shadow-xl transform -translate-x-full md:translate-x-0 transition-transform duration-300 ease-in-out z-40">
+        <div class="p-6">
+            <div class="flex justify-end md:hidden">
+                <button id="close-menu" class="text-gray-500 hover:text-gray-700">
+                    <i class="fa fa-times text-xl"></i>
+                </button>
+            </div>
+            <nav class="mt-8">
+                <ul class="space-y-1">
+                    <li>
+                        <a href="index.html" class="flex items-center p-3 rounded-lg hover:bg-gray-100 transition-colors">
+                            <i class="fa fa-home w-6"></i>
+                            <span>Home</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="book.html" class="flex items-center p-3 rounded-lg hover:bg-gray-100 transition-colors">
+                            <i class="fa fa-book w-6"></i>
+                            <span>Book</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="photo.html" class="flex items-center p-3 rounded-lg hover:bg-gray-100 transition-colors">
+                            <i class="fa fa-camera w-6"></i>
+                            <span>Photo</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="music.html" class="flex items-center p-3 rounded-lg bg-accent/10 text-accent font-medium">
+                            <i class="fa fa-music w-6"></i>
+                            <span>Music</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="movie.html" class="flex items-center p-3 rounded-lg hover:bg-gray-100 transition-colors">
+                            <i class="fa fa-film w-6"></i>
+                            <span>Movie</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="voyage.html" class="flex items-center p-3 rounded-lg hover:bg-gray-100 transition-colors">
+                            <i class="fa fa-plane w-6"></i>
+                            <span>Voyage</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="english.html" class="flex items-center p-3 rounded-lg hover:bg-gray-100 transition-colors">
+                            <i class="fa fa-language w-6"></i>
+                            <span>English</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="francaise.html" class="flex items-center p-3 rounded-lg hover:bg-gray-100 transition-colors">
+                            <i class="fa fa-language w-6"></i>
+                            <span>Française</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="arabic.html" class="flex items-center p-3 rounded-lg hover:bg-gray-100 transition-colors">
+                            <i class="fa fa-language w-6"></i>
+                            <span>اللغة العربية</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="macrame.html" class="flex items-center p-3 rounded-lg hover:bg-gray-100 transition-colors">
+                            <i class="fa fa-paint-brush w-6"></i>
+                            <span>Macrame</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="daily.html" class="flex items-center p-3 rounded-lg hover:bg-gray-100 transition-colors">
+                            <i class="fa fa-calendar w-6"></i>
+                            <span>Daily</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </aside>
+
+    <!-- 主内容区 -->
+    <main class="md:ml-64 transition-all duration-300 min-h-screen">
+        <!-- 分类头部 -->
+        <header class="bg-accent py-16 px-6 text-dark">
+            <div class="max-w-6xl mx-auto">
+                <h1 class="text-4xl font-bold mb-2 flex items-center">
+                    <i class="fa fa-music mr-3"></i> Music
+                </h1>
+                <p class="text-lg opacity-90">分享我喜欢的音乐和音乐感悟</p>
+            </div>
+        </header>
+
+        <!-- 内容区 -->
+        <section class="py-12 px-6">
+            <div class="max-w-6xl mx-auto">
+                <div class="flex flex-col lg:flex-row gap-8">
+                    <!-- 文章列表 -->
+                    <div class="lg:w-2/3">
+                        <!-- 标签筛选 -->
+                        <div class="flex flex-wrap gap-2 mb-8">
+                            <span class="tag-pill tag-pill-active">全部 (9)</span>
+                            <span class="tag-pill tag-pill-inactive"> indie (3)</span>
+                            <span class="tag-pill tag-pill-inactive">爵士 (2)</span>
+                            <span class="tag-pill tag-pill-inactive">古典 (2)</span>
+                            <span class="tag-pill tag-pill-inactive">电子 (2)</span>
+                        </div>
+
+                        <!-- 文章列表 -->
+                        <div class="space-y-8">
+                            <article class="bg-white rounded-xl overflow-hidden shadow-md hover-lift">
+                                <div class="md:flex">
+                                    <div class="md:w-1/3">
+                                        <img src="assets/images/music/music1.jpg" alt="独立音乐专辑封面" class="w-full h-full object-cover">
+                                    </div>
+                                    <div class="md:w-2/3 p-6">
+                                        <div class="flex items-center text-sm text-gray-500 mb-2">
+                                            <span class="bg-accent/10 text-accent px-2 py-1 rounded text-xs">indie</span>
+                                            <span class="ml-auto">2023-06-18</span>
+                                        </div>
+                                        <h3 class="text-xl font-bold mb-2"><a href="article.html?category=music&post=1">2023年上半年独立音乐推荐</a></h3>
+                                        <p class="text-gray-600 mb-4">今年上半年发现了不少优秀的独立音乐人，从民谣到摇滚，从国内到国外。这篇文章分享我最喜欢的几张专辑和单曲，附上线试听链接...</p>
+                                        <a href="article.html?category=music&post=1" class="text-accent font-medium hover:underline">阅读更多 →</a>
+                                    </div>
+                                </div>
+                            </article>
+
+                            <article class="bg-white rounded-xl overflow-hidden shadow-md hover-lift">
+                                <div class="md:flex">
+                                    <div class="md:w-1/3">
+                                        <img src="assets/images/music/music2.jpg" alt="爵士音乐会照片" class="w-full h-full object-cover">
+                                    </div>
+                                    <div class="md:w-2/3 p-6">
+                                        <div class="flex items-center text-sm text-gray-500 mb-2">
+                                            <span class="bg-accent/10 text-accent px-2 py-1 rounded text-xs">爵士</span>
+                                            <span class="ml-auto">2023-06-02</span>
+                                        </div>
+                                        <h3 class="text-xl font-bold mb-2"><a href="article.html?category=music&post=2">现场爵士乐：城市夜晚的灵魂</a></h3>
+                                        <p class="text-gray-600 mb-4">上个月去了几场爵士现场演出，不同乐队的风格各异，但都同样令人沉醉。分享这些演出的体验，以及新手如何入门欣赏爵士乐...</p>
+                                        <a href="article.html?category=music&post=2" class="text-accent font-medium hover:underline">阅读更多 →</a>
+                                    </div>
+                                </div>
+                            </article>
+
+                            <article class="bg-white rounded-xl overflow-hidden shadow-md hover-lift">
+                                <div class="md:flex">
+                                    <div class="md:w-1/3">
+                                        <img src="assets/images/music/music3.jpg" alt="古典音乐唱片" class="w-full h-full object-cover">
+                                    </div>
+                                    <div class="md:w-2/3 p-6">
+                                        <div class="flex items-center text-sm text-gray-500 mb-2">
+                                            <span class="bg-accent/10 text-accent px-2 py-1 rounded text-xs">古典</span>
+                                            <span class="ml-auto">2023-05-15</span>
+                                        </div>
+                                        <h3 class="text-xl font-bold mb-2"><a href="article.html?category=music&post=3">雨天适合听的室内乐推荐</a></h3>
+                                        <p class="text-gray-600 mb-4">下雨天，最适合蜷缩在沙发上听室内乐了。从弦乐四重奏到钢琴三重奏，这些作品能让你在雨天里找到内心的平静...</p>
+                                        <a href="article.html?category=music&post=3" class="text-accent font-medium hover:underline">阅读更多 →</a>
+                                    </div>
+                                </div>
+                            </article>
+                        </div>
+
+                        <!-- 分页 -->
+                        <div class="mt-10 flex justify-center">
+                            <nav class="inline-flex rounded-md shadow">
+                                <a href="#" class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+                                    <i class="fa fa-chevron-left"></i>
+                                </a>
+                                <a href="#" class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-accent text-sm font-medium text-dark">
+                                    1
+                                </a>
+                                <a href="#" class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">
+                                    2
+                                </a>
+                                <a href="#" class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+                                    <i class="fa fa-chevron-right"></i>
+                                </a>
+                            </nav>
+                        </div>
+                    </div>
+
+                    <!-- 侧边栏 -->
+                    <div class="lg:w-1/3">
+                        <!-- 搜索框 -->
+                        <div class="bg-white p-6 rounded-xl shadow-md mb-8">
+                            <h3 class="text-lg font-bold mb-4">搜索文章</h3>
+                            <div class="flex">
+                                <input type="text" placeholder="输入关键词..." class="flex-1 px-4 py-2 border border-gray-300 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-accent">
+                                <button class="bg-accent text-dark px-4 py-2 rounded-r-lg hover:bg-accent/90 transition-colors">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- 标签云 -->
+                        <div class="bg-white p-6 rounded-xl shadow-md mb-8">
+                            <h3 class="text-lg font-bold mb-4">标签</h3>
+                            <div class="flex flex-wrap gap-2">
+                                <a href="#" class="px-3 py-1 bg-gray-100 rounded-full text-sm hover:bg-accent hover:text-dark transition-colors">indie (3)</a>
+                                <a href="#" class="px-3 py-1 bg-gray-100 rounded-full text-sm hover:bg-accent hover:text-dark transition-colors">爵士 (2)</a>
+                                <a href="#" class="px-3 py-1 bg-gray-100 rounded-full text-sm hover:bg-accent hover:text-dark transition-colors">古典 (2)</a>
+                                <a href="#" class="px-3 py-1 bg-gray-100 rounded-full text-sm hover:bg-accent hover:text-dark transition-colors">电子 (2)</a>
+                                <a href="#" class="px-3 py-1 bg-gray-100 rounded-full text-sm hover:bg-accent hover:text-dark transition-colors">现场 (2)</a>
+                                <a href="#" class="px-3 py-1 bg-gray-100 rounded-full text-sm hover:bg-accent hover:text-dark transition-colors">推荐 (5)</a>
+                            </div>
+                        </div>
+
+                        <!-- 推荐阅读 -->
+                        <div class="bg-white p-6 rounded-xl shadow-md">
+                            <h3 class="text-lg font-bold mb-4">推荐阅读</h3>
+                            <div class="space-y-4">
+                                <a href="#" class="flex gap-3 group">
+                                    <img src="assets/images/music/sidebar1.jpg" alt="电子音乐演出" class="w-20 h-20 object-cover rounded">
+                                    <div>
+                                        <h4 class="font-medium group-hover:text-accent transition-colors">夏日电子音乐派对指南</h4>
+                                        <p class="text-sm text-gray-500 mt-1">2023-04-22</p>
+                                    </div>
+                                </a>
+                                <a href="#" class="flex gap-3 group">
+                                    <img src="assets/images/music/sidebar2.jpg" alt="黑胶唱片" class="w-20 h-20 object-cover rounded">
+                                    <div>
+                                        <h4 class="font-medium group-hover:text-accent transition-colors">黑胶唱片入门：从选购到保养</h4>
+                                        <p class="text-sm text-gray-500 mt-1">2023-03-30</p>
+                                    </div>
+                                </a>
+                                <a href="#" class="flex gap-3 group">
+                                    <img src="assets/images/music/sidebar3.jpg" alt="电影原声" class="w-20 h-20 object-cover rounded">
+                                    <div>
+                                        <h4 class="font-medium group-hover:text-accent transition-colors">那些让人难忘的电影原声</h4>
+                                        <p class="text-sm text-gray-500 mt-1">2023-02-18</p>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 页脚 -->
+        <footer class="bg-dark text-white py-12 px-6 mt-16">
+            <div class="max-w-6xl mx-auto">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <div class="mb-6 md:mb-0">
+                        <h3 class="text-xl font-bold mb-2">Vlamenco's Blog</h3>
+                        <p class="text-gray-400">分享生活的美好瞬间</p>
+                    </div>
+                    
+                    <div class="flex flex-col items-center md:items-end">
+                        <div class="flex space-x-4 mb-4">
+                            <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                                <i class="fa fa-douban"></i>
+                            </a>
+                            <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                                <i class="fa fa-book"></i>
+                            </a>
+                            <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                                <i class="fa fa-globe"></i>
+                            </a>
+                            <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                                <i class="fa fa-play-circle"></i>
+                            </a>
+                            <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                                <i class="fa fa-github"></i>
+                            </a>
+                        </div>
+                        <p class="text-gray-400 text-sm">© 2023 Vlamenco's Blog. All rights reserved.</p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </main>
+
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/category.js"></script>
+</body>
+</html>
+    

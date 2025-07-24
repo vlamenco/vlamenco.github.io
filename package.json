@@ -1,0 +1,31 @@
+{
+  "name": "vlamenco-blog",
+  "version": "1.0.0",
+  "description": "A personal blog with fresh dopamine style",
+  "main": "index.html",
+  "scripts": {
+    "dev": "live-server",
+    "build": "postcss assets/css/style.css -o assets/css/output.css",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "blog",
+    "personal",
+    "html",
+    "css",
+    "javascript",
+    "markdown"
+  ],
+  "author": "Vlamenco",
+  "license": "MIT",
+  "devDependencies": {
+    "autoprefixer": "^10.4.14",
+    "live-server": "^1.2.2",
+    "postcss": "^8.4.24",
+    "postcss-cli": "^10.1.0",
+    "tailwindcss": "^3.3.2"
+  },
+  "dependencies": {
+    "marked": "^4.3.0"
+  }
+}

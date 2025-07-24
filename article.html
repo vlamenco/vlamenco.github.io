@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>夏日海边的宁静时光 - Vlamenco's Blog</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script>
+        // Tailwind 配置 - 多巴胺风格配色
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#FF6B8B', // 粉色作为主色调
+                        secondary: '#6B9FFF', // 蓝色作为辅助色
+                        accent1: '#FFD166', // 黄色
+                        accent2: '#06D6A0', // 绿色
+                        accent3: '#118AB2', // 深蓝色
+                        accent4: '#EF476F', // 亮粉色
+                        light: '#F9F7F7',
+                        dark: '#2C3E50'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                        serif: ['Georgia', 'Cambria', 'serif']
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .text-shadow {
+                text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            }
+            .article-content p {
+                @apply my-4 leading-relaxed;
+            }
+            .article-content h2 {
+                @apply text-2xl font-bold mt-8 mb-4 text-dark;
+            }
+            .article-content img {
+                @apply w-full h-auto rounded-lg my-6;
+            }
+            .article-content blockquote {
+                @apply border-l-4 border-primary pl-4 italic my-6 text-gray-600;
+            }
+            .article-content ul {
+                @apply list-disc pl-6 my-4;
+            }
+        }
+    </style>
+</head>
+<body class="bg-light text-dark font-sans">
+    <div class="flex min-h-screen">
+        <!-- 左侧导航栏 - 移动端默认隐藏 -->
+        <aside id="sidebar" class="fixed inset-y-0 left-0 z-50 w-64 bg-white shadow-lg transform -translate-x-full md:translate-x-0 transition-transform duration-300 ease-in-out">
+            <div class="flex flex-col h-full">
+                <!-- 导航栏标题 -->
+                <div class="p-6 border-b border-gray-100">
+                    <h2 class="text-2xl font-bold text-primary">Menu</h2>
+                </div>
+                
+                <!-- 导航链接 -->
+                <nav class="flex-1 overflow-y-auto p-4">
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="flex items-center p-3 rounded-lg hover:bg-gray-100 transition-colors">
+                            <i class="fa fa-home w-6"></i> Home
+                        </a></li>
+                        <li><a href="book.html" class="flex items-center p-3 rounded-lg hover:bg-gray-100 transition-colors">
+                            <i class="fa fa-book w-6"></i> Book
+                        </a></li>
+                        <li><a href="photo.html" class="flex items-center p-3 rounded-lg hover:bg-gray-100 transition-colors">
+                            <i class="fa fa-camera w-6"></i> Photo
+                        </a></li>
+                        <li><a href="music.html" class="flex items-center p-3 rounded-lg hover:bg-gray-100 transition-colors">
+                            <i class="fa fa-music w-6"></i> Music
+                        </a></li>
+                        <li><a href="movie.html" class="flex items-center p-3 rounded-lg hover:bg-gray-100 transition-colors">
+                            <i class="fa fa-film w-6"></i> Movie
+                        </a></li>
+                        <li><a href="voyage.html" class="flex items-center p-3 rounded-lg bg-primary/10 text-primary font-medium">
+                            <i class="fa fa-plane w-6"></i> Voyage
+                        </a></li>
+                        <li><a href="english.html" class="flex items-center p-3 rounded-lg hover:bg-gray-100 transition-colors">
+                            <i class="fa fa-language w-6"></i> English
+                        </a></li>
+                        <li><a href="francaise.html" class="flex items-center p-3 rounded-lg hover:bg-gray-100 transition-colors">
+                            <i class="fa fa-language w-6"></i> Française
+                        </a></li>
+                        <li><a href="arabic.html" class="flex items-center p-3 rounded-lg hover:bg-gray-100 transition-colors">
+                            <i class="fa fa-language w-6"></i> العربية
+                        </a></li>
+                        <li><a href="macrame.html" class="flex items-center p-3 rounded-lg hover:bg-gray-100 transition-colors">
+                            <i class="fa fa-paint-brush w-6"></i> Macrame
+                        </a></li>
+                        <li><a href="daily.html" class="flex items-center p-3 rounded-lg hover:bg-gray-100 transition-colors">
+                            <i class="fa fa-calendar w-6"></i> Daily
+                        </a></li>
+                    </ul>
+                </nav>
+                
+                <!-- 导航栏底部 -->
+                <div class="p-4 border-t border-gray-100">
+                    <p class="text-sm text-gray-500">© 2023 Vlamenco's Blog</p>
+                </div>
+            </div>
+        </aside>
+
+        <!-- 主内容区域 -->
+        <main class="flex-1 md:ml-64">
+            <!-- 顶部导航栏 -->
+            <header class="sticky top-0 z-40 bg-white/80 backdrop-blur-md shadow-sm">
+                <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+                    <!-- 移动端菜单按钮 -->
+                    <button id="menu-toggle" class="md:hidden text-dark p-2 rounded-md hover:bg-gray-100">
+                        <i class="fa fa-bars text-xl"></i>
+                    </button>
+                    
+                    <!-- 博客标题（仅在移动端显示） -->
+                    <h1 class="md:hidden text-xl font-bold text-primary">Vlamenco</h1>
+                    
+                    <!-- 搜索按钮 -->
+                    <button class="text-dark p-2 rounded-md hover:bg-gray-100">
+                        <i class="fa fa-search text-xl"></i>
+                    </button>
+                </div>
+            </header>
+
+            <!-- 文章内容 -->
+            <div class="container mx-auto px-4 py-6">
+                <!-- 文章头部 -->
+                <article class="max-w-4xl mx-auto bg-white rounded-xl shadow-sm overflow-hidden mb-10">
+                    <div class="relative h-[40vh]">
+                        <img src="https://picsum.photos/1200/600?random=1" alt="夏日海边风景" class="w-full h-full object-cover">
+                        <div class="absolute top-4 left-4">
+                            <span class="bg-accent3/90 text-white px-3 py-1 rounded-full text-sm">Voyage</span>
+                        </div>
+                    </div>
+                    
+                    <div class="p-6 md:p-8">
+                        <h1 class="text-3xl md:text-4xl font-bold mb-4">夏日海边的宁静时光</h1>
+                        
+                        <div class="flex items-center justify-between mb-6 text-sm text-gray-500">
+                            <div class="flex items-center gap-2">
+                                <img src="assets/images/profile.jpg" alt="作者头像" class="w-8 h-8 rounded-full object-cover">
+                                <span>Vlamenco</span>
+                            </div>
+                            <time>2023年6月15日 · 阅读时间: 8分钟</time>
+                        </div>
+                        
+                        <!-- 文章内容（由Markdown渲染） -->
+                        <div id="article-content" class="article-content font-serif text-lg">
+                            <!-- 内容将通过JavaScript从Markdown文件加载 -->
+                        </div>
+                        
+                        <!-- 文章标签 -->
+                        <div class="mt-10 pt-6 border-t border-gray-100">
+                            <div class="flex flex-wrap gap-2">
+                                <span class="text-sm text-gray-500">标签:</span>
+                                <a href="#" class="px-3 py-1 bg-accent3/10 text-accent3 rounded-full text-sm hover:bg-accent3/20 transition-colors">旅行</a>
+                                <a href="#" class="px-3 py-1 bg-accent3/10 text-accent3 rounded-full text-sm hover:bg-accent3/20 transition-colors">海边</a>
+                                <a href="#" class="px-3 py-1 bg-accent3/10 text-accent3 rounded-full text-sm hover:bg-accent3/20 transition-colors">夏日</a>
+                                <a href="#" class="px-3 py-1 bg-accent3/10 text-accent3 rounded-full text-sm hover:bg-accent3/20 transition-colors">宁静</a>
+                            </div>
+                        </div>
+                        
+                        <!-- 分享按钮 -->
+                        <div class="mt-6 flex justify-between items-center">
+                            <div class="flex gap-3">
+                                <button class="p-2 bg-gray-100 rounded-full text-gray-600 hover:bg-gray-200 transition-colors">
+                                    <i class="fa fa-heart"></i>
+                                </button>
+                                <button class="p-2 bg-gray-100 rounded-full text-gray-600 hover:bg-gray-200 transition-colors">
+                                    <i class="fa fa-bookmark"></i>
+                                </button>
+                                <button class="p-2 bg-gray-100 rounded-full text-gray-600 hover:bg-gray-200 transition-colors">
+                                    <i class="fa fa-share-alt"></i>
+                                </button>
+                            </div>
+                            <div class="text-sm text-gray-500">
+                                <i class="fa fa-eye mr-1"></i> 阅读: 342
+                            </div>
+                        </div>
+                    </div>
+                </article>
+                
+                <!-- 作者信息 -->
+                <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-sm p-6 mb-10">
+                    <div class="flex flex-col sm:flex-row items-center gap-4">
+                        <img src="assets/images/profile.jpg" alt="Vlamenco的个人照片" class="w-20 h-20 rounded-full object-cover border-4 border-white shadow-md">
+                        <div class="text-center sm:text-left">
+                            <h3 class="text-xl font-bold mb-1">Vlamenco</h3>
+                            <p class="text-gray-600 mb-3">热爱生活，喜欢旅行、阅读和手工艺的创作者</p>
+                            <div class="flex justify-center sm:justify-start gap-3">
+                                <a href="#" class="w-8 h-8 rounded-full bg-[#2289D0] flex items-center justify-center text-white hover:scale-110 transition-transform" title="豆瓣">
+                                    <i class="fa fa-book"></i>
+                                </a>
+                                <a href="#" class="w-8 h-8 rounded-full bg-[#FE2C55] flex items-center justify-center text-white hover:scale-110 transition-transform" title="小红书">
+                                    <i class="fa fa-picture-o"></i>
+                                </a>
+                                <a href="#" class="w-8 h-8 rounded-full bg-[#00B42A] flex items-center justify-center text-white hover:scale-110 transition-transform" title="蚂蜂窝">
+                                    <i class="fa fa-map-marker"></i>
+                                </a>
+                                <a href="#" class="w-8 h-8 rounded-full bg-[#FB7299] flex items-center justify-center text-white hover:scale-110 transition-transform" title="哔哩哔哩">
+                                    <i class="fa fa-play-circle"></i>
+                                </a>
+                                <a href="#" class="w-8 h-8 rounded-full bg-[#24292e] flex items-center justify-center text-white hover:scale-110 transition-transform" title="GitHub">
+                                    <i class="fa fa-github"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 相关文章 -->
+                <div class="max-w-4xl mx-auto mb-10">
+                    <h2 class="text-2xl font-bold mb-6">相关文章</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <article class="bg-white rounded-xl shadow-sm overflow-hidden card-hover">
+                            <img src="https://picsum.photos/600/400?random=5" alt="相关文章图片" class="w-full h-48 object-cover">
+                            <div class="p-4">
+                                <div class="flex items-center text-sm text-gray-500 mb-2">
+                                    <span class="bg-accent3/10 text-accent3 px-2 py-1 rounded-full text-xs mr-2">Voyage</span>
+                                    <time>2023年5月20日</time>
+                                </div>
+                                <h3 class="text-lg font-bold mb-2">
+                                    <a href="article.html" class="hover:text-primary transition-colors">山间小屋的周末时光</a>
+                                </h3>
+                                <p class="text-gray-600 text-sm line-clamp-2">远离城市的喧嚣，在山间小屋里度过一个宁静的周末，感受大自然的美好...</p>
+                            </div>
+                        </article>
+                        
+                        <article class="bg-white rounded-xl shadow-sm overflow-hidden card-hover">
+                            <img src="https://picsum.photos/600/400?random=6" alt="相关文章图片" class="w-full h-48 object-cover">
+                            <div class="p-4">
+                                <div class="flex items-center text-sm text-gray-500 mb-2">
+                                    <span class="bg-accent3/10 text-accent3 px-2 py-1 rounded-full text-xs mr-2">Voyage</span>
+                                    <time>2023年4月10日</time>
+                                </div>
+                                <h3 class="text-lg font-bold mb-2">
+                                    <a href="article.html" class="hover:text-primary transition-colors">古城漫步：寻找历史的痕迹</a>
+                                </h3>
+                                <p class="text-gray-600 text-sm line-clamp-2">漫步在古老的城市街道上，每一块石板都承载着历史的记忆，每一座建筑都诉说着过去的故事...</p>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+                
+                <!-- 评论区 -->
+                <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-sm p-6">
+                    <h2 class="text-2xl font-bold mb-6">评论 (5)</h2>
+                    
+                    <!-- 评论输入框 -->
+                    <div class="mb-8">
+                        <textarea class="w-full p-4 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary resize-none" rows="4" placeholder="分享你的想法..."></textarea>
+                        <div class="flex justify-end mt-3">
+                            <button class="bg-primary text-white px-6 py-2 rounded-lg hover:bg-primary/90 transition-colors">发布评论</button>
+                        </div>
+                    </div>
+                    
+                    <!-- 评论列表 -->
+                    <div class="space-y-6">
+                        <!-- 评论1 -->
+                        <div class="flex gap-4">
+                            <img src="https://picsum.photos/100/100?random=20" alt="评论者头像" class="w-10 h-10 rounded-full object-cover">
+                            <div class="flex-1">
+                                <div class="flex justify-between items-center mb-1">
+                                    <h4 class="font-medium">旅行者小明</h4>
+                                    <span class="text-sm text-gray-500">3天前</span>
+                                </div>
+                                <p class="text-gray-700 mb-2">这篇文章让我想起了自己去海边的经历，那种宁静的感觉真的很棒！</p>
+                                <div class="flex items-center gap-4 text-sm">
+                                    <button class="text-gray-500 hover:text-primary transition-colors"><i class="fa fa-heart-o mr-1"></i> 喜欢 (12)</button>
+                                    <button class="text-gray-500 hover:text-primary transition-colors"><i class="fa fa-reply mr-1"></i> 回复</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 评论2 -->
+                        <div class="flex gap-4">
+                            <img src="https://picsum.photos/100/100?random=21" alt="评论者头像" class="w-10 h-10 rounded-full object-cover">
+                            <div class="flex-1">
+                                <div class="flex justify-between items-center mb-1">
+                                    <h4 class="font-medium">海边漫步</h4>
+                                    <span class="text-sm text-gray-500">1周前</span>
+                                </div>
+                                <p class="text-gray-700 mb-2">请问这是哪个海滩呀？看起来太美了，想暑假去看看！</p>
+                                <div class="flex items-center gap-4 text-sm">
+                                    <button class="text-gray-500 hover:text-primary transition-colors"><i class="fa fa-heart-o mr-1"></i> 喜欢 (8)</button>
+                                    <button class="text-gray-500 hover:text-primary transition-colors"><i class="fa fa-reply mr-1"></i> 回复</button>
+                                </div>
+                                
+                                <!-- 作者回复 -->
+                                <div class="mt-4 ml-6 flex gap-3">
+                                    <img src="assets/images/profile.jpg" alt="作者头像" class="w-8 h-8 rounded-full object-cover">
+                                    <div class="flex-1 bg-gray-50 p-3 rounded-lg">
+                                        <div class="flex justify-between items-center mb-1">
+                                            <h5 class="font-medium text-primary">Vlamenco <span class="text-xs bg-primary/10 text-primary px-2 py-0.5 rounded-full">作者</span></h5>
+                                            <span class="text-sm text-gray-500">6天前</span>
+                                        </div>
+                                        <p class="text-gray-700 text-sm">这是青岛的石老人海滩，确实很美的地方，适合夏天去避暑~</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 查看更多评论按钮 -->
+                        <button class="w-full py-3 border border-gray-200 rounded-lg text-gray-600 hover:bg-gray-50 transition-colors">
+                            查看更多评论
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 页脚 -->
+            <footer class="bg-white border-t border-gray-200 mt-16">
+                <div class="container mx-auto px-4 py-10">
+                    <div class="flex flex-col md:flex-row justify-between items-center">
+                        <div class="mb-6 md:mb-0">
+                            <h2 class="text-2xl font-bold text-primary mb-2">Vlamenco's Blog</h2>
+                            <p class="text-gray-600">记录生活的点滴，分享美好的瞬间</p>
+                        </div>
+                        <div class="flex flex-col items-center md:items-end">
+                            <div class="flex gap-4 mb-4">
+                                <a href="#" class="text-gray-500 hover:text-primary transition-colors">
+                                    <i class="fa fa-book text-xl"></i>
+                                </a>
+                                <a href="#" class="text-gray-500 hover:text-primary transition-colors">
+                                    <i class="fa fa-picture-o text-xl"></i>
+                                </a>
+                                <a href="#" class="text-gray-500 hover:text-primary transition-colors">
+                                    <i class="fa fa-map-marker text-xl"></i>
+                                </a>
+                                <a href="#" class="text-gray-500 hover:text-primary transition-colors">
+                                    <i class="fa fa-play-circle text-xl"></i>
+                                </a>
+                                <a href="#" class="text-gray-500 hover:text-primary transition-colors">
+                                    <i class="fa fa-github text-xl"></i>
+                                </a>
+                            </div>
+                            <p class="text-sm text-gray-500">© 2023 Vlamenco's Blog. All rights reserved.</p>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </main>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // 移动端菜单切换
+        document.getElementById('menu-toggle').addEventListener('click', function() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('-translate-x-full');
+        });
+
+        // 从Markdown文件加载文章内容
+        document.addEventListener('DOMContentLoaded', function() {
+            // 这里使用fetch加载markdown文件
+            fetch('content/voyage/summer-beach.md')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.text();
+                })
+                .then(markdown => {
+                    // 使用marked库将markdown转换为HTML
+                    const html = marked.parse(markdown);
+                    document.getElementById('article-content').innerHTML = html;
+                })
+                .catch(error => {
+                    console.error('Error loading markdown:', error);
+                    document.getElementById('article-content').innerHTML = `
+                        <p>抱歉，无法加载文章内容。</p>
+                    `;
+                });
+        });
+    </script>
+</body>
+</html>
